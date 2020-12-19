@@ -6,6 +6,7 @@ WORKDIR /app
 RUN pip install django
 RUN django-admin startproject sampleApp
 WORKDIR /app/sampleApp
+RUN sed -e "s/ALLOWED_HOSTS = []/ALLOWED_HOSTS = [*]/" ./sampleApp/settings.py
 RUN python manage.py migrate
 
 CMD python manage.py runserver 0:80
